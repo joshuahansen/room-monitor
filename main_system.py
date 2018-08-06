@@ -7,6 +7,8 @@ pb = Pushbullet()
 
 temp = sense.get_temperature()
 
+print("Temperature: {}".format(temp))
+
 if temp < 20:
     pb.send_note(
         "Cold",
