@@ -30,3 +30,6 @@ class SensorMonitor:
         for x in range(sample_size):
             temp.append(self.sense.get_temperature())
         return round((sum(temp)/len(temp)), dec_place)
+
+    def write(self, message):
+        self.sense.show_message(message)

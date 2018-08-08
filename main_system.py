@@ -12,6 +12,8 @@ hum = sm.get_hum()
 temp = sm.get_temp()
 time = datetime.now()
 
+sm.write("SENSING TEMPERATURE")
+
 db.save_data(time, temp, hum)
 
 if temp < 20:
