@@ -5,21 +5,15 @@
         <p>Welcome to the sense hat analytics page</p>
         <p>The graph bellow displays the temperature and 
             humidity of a room measured buy the Raspberry Pi Sense Hat</p>
-        <table class='table' id="dataTable">
-            <tr>
-                <th>Temperature</th>
-                <th>Humidity</th>
-                <th>Date Time</th>
-            </tr>
-        </table>
-        <script>
-            let data = {% data %}
-            if(data) {
-                $(document).onload(function() {
-                });
-            }
-        </script>
+    </div>
+    <script>
+	let data = JSON.parse('{{ data|tojson|safe }}')
+    </script>
+    <div class='row'>
+	<canvas id='humidityChart' width='400' height='400'></canvas>
+	<script src='/static/humidityChart.js'></script>
     </div>
     <div class='row'>
-    <div>
+	<canvas id='temperatureChart' width='400' height='400'></canvas>
+    </div>
 {% endblock %}

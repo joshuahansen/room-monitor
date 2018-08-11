@@ -1,2 +1,19 @@
 2018-08-07 23:39:05,278 - ERROR - no such table: sense_readings
 2018-08-07 23:47:13,046 - ERROR - table sense_readings already exists
+2018-08-11 12:51:11,009 - ERROR - SQLite objects created in a thread can only be used in that same thread.The object was created in thread id 1995477008 and this is thread id 1978066032
+2018-08-11 13:10:05,272 - ERROR - SQLite objects created in a thread can only be used in that same thread.The object was created in thread id 1995477008 and this is thread id 1978066032
+2018-08-11 13:10:15,028 - ERROR - SQLite objects created in a thread can only be used in that same thread.The object was created in thread id 1995477008 and this is thread id 1978066032
+2018-08-11 13:10:48,311 - ERROR - SQLite objects created in a thread can only be used in that same thread.The object was created in thread id 1995477008 and this is thread id 1978066032
+2018-08-11 13:12:15,057 - ERROR - SQLite objects created in a thread can only be used in that same thread.The object was created in thread id 1995477008 and this is thread id 1978066032
+2018-08-11 13:13:05,947 - ERROR - SQLite objects created in a thread can only be used in that same thread.The object was created in thread id 1995477008 and this is thread id 1978066032
+2018-08-11 13:13:38,093 - ERROR - SQLite objects created in a thread can only be used in that same thread.The object was created in thread id 1995477008 and this is thread id 1978066032
+2018-08-11 13:14:11,444 - ERROR - SQLite objects created in a thread can only be used in that same thread.The object was created in thread id 1995964432 and this is thread id 1978553456
+2018-08-11 13:23:04,967 - ERROR - SQLite objects created in a thread can only be used in that same thread.The object was created in thread id 1996234768 and this is thread id 1978823792
+2018-08-11 13:24:51,225 - ERROR - SQLite objects created in a thread can only be used in that same thread.The object was created in thread id 1996054544 and this is thread id 1978643568
+2018-08-11 13:27:01,763 - ERROR - SQLite objects created in a thread can only be used in that same thread.The object was created in thread id 1995759632 and this is thread id 1978348656
+2018-08-11 13:35:55,903 - ERROR - SQLite objects created in a thread can only be used in that same thread.The object was created in thread id 1995612176 and this is thread id 1978201200
+2018-08-11 13:37:21,393 - ERROR - unable to open database file
+2018-08-11 13:38:04,067 - ERROR - SQLite objects created in a thread can only be used in that same thread.The object was created in thread id 1995866128 and this is thread id 1978455152
+2018-08-11 13:43:58,265 - ERROR - SQLite objects created in a thread can only be used in that same thread.The object was created in thread id 1996042256 and this is thread id 1978631280
+2018-08-11 13:55:58,201 - ERROR - SQLite objects created in a thread can only be used in that same thread.The object was created in thread id 1996042256 and this is thread id 1978631280
+2018-08-11 14:01:09,232 - ERROR - SQLite objects created in a thread can only be used in that same thread.The object was created in thread id 1995440144 and this is thread id 1978029168

@@ -1,5 +1,6 @@
 import sqlite3
 import logging
+from os import path
 
 
 # Database class for handling all interactions with the SQLite database
@@ -11,8 +12,11 @@ class SqliteConnection:
         self.logger = logging.getLogger('sqlite_logger')
         self.logger.setLevel(logging.ERROR)
 
+        # get Root path
+        ROOT = path.dirname(path.realpath(__file__))
+
         # Create file handler and set formatter for logging
-        fh = logging.FileHandler('/home/pi/room-monitor/sqlite_error.log')
+        fh = logging.FileHandler(path.join(ROOT, "sqlite_error.log"))
         fh.setLevel(logging.ERROR)
         formatter = logging.Formatter(
                 '%(asctime)s - %(levelname)s - %(message)s'
@@ -21,7 +25,7 @@ class SqliteConnection:
 
         self.logger.addHandler(fh)
         try:
-            self.conn = sqlite3.connect('/home/pi/room-monitor/sense_hat_readings.db')
+            self.conn = sqlite3.connect(path.join(ROOT, "sense_hat_readings.db"))
             self.cur = self.conn.cursor()
         except sqlite3.Error as err:
             self.logger.error(err)
