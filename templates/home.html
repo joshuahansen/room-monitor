@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class='row text-center'>
+        <h2>Sense Hat Analytics</h2>
+        <p>Welcome to the sense hat analytics page</p>
+        <p>The graph bellow displays the temperature and 
+            humidity of a room measured buy the Raspberry Pi Sense Hat</p>
+        <table class='table' id="dataTable">
+            <tr>
+                <th>Temperature</th>
+                <th>Humidity</th>
+                <th>Date Time</th>
+            </tr>
+        </table>
+        <script>
+            let data = {% data %}
+            if(data) {
+                $(document).onload(function() {
+                });
+            }
+        </script>
+    </div>
+    <div class='row'>
+    <div>
+{% endblock %}
