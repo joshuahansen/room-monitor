@@ -1,39 +1,54 @@
+"""
+Author: Joshua Hansen
+Student Number: s3589185
+Email: s3589185@student.rmit.edu.au
+
+Programming Interrnet of Things COSC2674
+Semester 2, 2018
+Assignment 1
+
+This module is used for connecting to the sqlite database on the raspberry pi.
+It haddles all sql queries to keep the database seperate from the
+main application.
+"""
 import sqlite3
 import logging
 from os import path
 
 
-# Database class for handling all interactions with the SQLite database
-class SqliteConnection:
+class SqliteConnection(object):
+    """Database class for handling all interactions with the SQLite database"""
 
-    # Constructor gets connection and creates a cursor,
-    # Create a logger for error reporting
     def __init__(self):
+        """
+        Constructor gets connection and creates a cursor.
+        Create a logger for error reporting
+        """
         self.logger = logging.getLogger('sqlite_logger')
         self.logger.setLevel(logging.ERROR)
 
         # get Root path
-        ROOT = path.dirname(path.realpath(__file__))
+        root = path.dirname(path.realpath(__file__))
 
         # Create file handler and set formatter for logging
-        fh = logging.FileHandler(path.join(ROOT, "sqlite_error.log"))
-        fh.setLevel(logging.ERROR)
+        file_handle = logging.FileHandler(path.join(root, "sqlite_error.log"))
+        file_handle.setLevel(logging.ERROR)
         formatter = logging.Formatter(
-                '%(asctime)s - %(levelname)s - %(message)s'
+            '%(asctime)s - %(levelname)s - %(message)s'
         )
-        fh.setFormatter(formatter)
+        file_handle.setFormatter(formatter)
 
-        self.logger.addHandler(fh)
+        self.logger.addHandler(file_handle)
         try:
             self.conn = sqlite3.connect(
-                    path.join(ROOT, "sense_hat_readings.db")
+                path.join(root, "sense_hat_readings.db")
             )
             self.cur = self.conn.cursor()
         except sqlite3.Error as err:
             self.logger.error(err)
 
-    # Initially used to create the table for the sense hat readings
     def create_table(self):
+        """Initially used to create the table for the sense hat readings"""
         try:
             self.cur.execute('''CREATE TABLE sense_readings
                    (timestamp text, temperature real, humidity real)''')
@@ -41,8 +56,8 @@ class SqliteConnection:
         except sqlite3.Error as err:
             self.logger.error(err)
 
-    # Save the data into the database
     def save_data(self, time, temp, humi):
+        """Save the data into the database"""
         try:
             self.cur.execute(''' INSERT INTO sense_readings
                     VALUES(?, ?, ?)''', (time, temp, humi))
@@ -50,23 +65,23 @@ class SqliteConnection:
         except sqlite3.Error as err:
             self.logger.error(err)
 
-    # Retrieve all the data from the database
     def get_data(self):
+        """Retrieve all the data from the database"""
         try:
             return self.cur.execute('SELECT * FROM sense_readings')
         except sqlite3.Error as err:
             self.logger.error(err)
 
-    # Delete all the data from the database. Remove for final release
     def delete_table_content(self):
+        """Delete all the data from the database. Remove for final release"""
         try:
             self.cur.execute('DELETE FROM sense_readings')
             self.conn.commit()
         except sqlite3.Error as err:
             self.logger.error(err)
 
-    # close the connection with the database
     def close(self):
+        """Close the connection with the database"""
         try:
             self.conn.close()
         except sqlite3.Error as err:
