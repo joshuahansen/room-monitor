@@ -10,10 +10,14 @@
 	let data = JSON.parse('{{ data|tojson|safe }}')
     </script>
     <div class='row'>
-	<canvas id='humidityChart' width='400' height='400'></canvas>
-	<script src='/static/humidityChart.js'></script>
+	    <div class='col-sm-12'>
+		<canvas id='humidityChart' width='80vw' height='50vh'></canvas>
+	    </div>
     </div>
     <div class='row'>
-	<canvas id='temperatureChart' width='400' height='400'></canvas>
+	    <div class='col-sm-12'>
+		<canvas id='temperatureChart' width='80vw' height='50vh'></canvas>
+	    </div>
     </div>
+    <script src='/static/senseCharts.js'></script>
 {% endblock %}

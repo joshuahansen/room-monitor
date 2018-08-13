@@ -25,7 +25,9 @@ class SqliteConnection:
 
         self.logger.addHandler(fh)
         try:
-            self.conn = sqlite3.connect(path.join(ROOT, "sense_hat_readings.db"))
+            self.conn = sqlite3.connect(
+                    path.join(ROOT, "sense_hat_readings.db")
+            )
             self.cur = self.conn.cursor()
         except sqlite3.Error as err:
             self.logger.error(err)

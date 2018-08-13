@@ -1,4 +1,5 @@
 from sense_hat import SenseHat
+import os
 
 
 class SensorMonitor:
@@ -21,7 +22,10 @@ class SensorMonitor:
     # Get the temperature from the sense hat to given decimal place
     def get_temp(self, dec_place=2):
         temp = self.sense.get_temperature()
-        return round(temp, dec_place)
+        temp = round(temp, dec_place)
+        cpu_temp = self.get_cpu_temperature()
+
+        return temp - ((cpu_temp - temp)/1.5)
 
     # Returns the average temperature over a given sample size
     # or a default range
@@ -29,7 +33,15 @@ class SensorMonitor:
         temp = list()
         for x in range(sample_size):
             temp.append(self.sense.get_temperature())
-        return round((sum(temp)/len(temp)), dec_place)
+        temp = round((sum(temp)/len(temp)), dec_place)
+        cpu_temp = self.get_cpu_temperature()
+
+        return temp - ((cpu_temp - temp)/1.5)
 
     def write(self, message):
         self.sense.show_message(message)
+
+    def get_cpu_temperature(self):
+        res = os.popen("vcgencmd measure_temp").readline()
+        t = float(res.replace("temp=", "").replace("'C\n", ""))
+        return(t)

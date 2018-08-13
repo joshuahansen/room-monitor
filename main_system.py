@@ -1,7 +1,7 @@
+from datetime import datetime
 from pushbullet import Pushbullet
 from sensor_monitor import SensorMonitor
 from sqlite_connection import SqliteConnection
-from datetime import datetime
 
 
 pb = Pushbullet()
@@ -21,5 +21,5 @@ if temp < 20:
         "Cold",
         "The room is under 20 degrees you should bring a jacket"
     )
-    
+
 db.close()
