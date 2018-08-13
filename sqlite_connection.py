@@ -16,7 +16,7 @@ import logging
 from os import path
 
 
-class SqliteConnection(object):
+class SqliteConnection:
     """Database class for handling all interactions with the SQLite database"""
 
     def __init__(self):

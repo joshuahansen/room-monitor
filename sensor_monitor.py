@@ -15,7 +15,7 @@ import os
 from sense_hat import SenseHat
 
 
-class SensorMonitor(object):
+class SensorMonitor:
     """
     SensorMonitor Class
     This Class deals with all the different readings from the sense
