@@ -23,6 +23,9 @@ def main():
     monitor = SensorMonitor()
     database = SqliteConnection()
 
+    # Threshold to notify users once temperature has fallen bellow it
+    temp_threshold = 20
+
     hum = monitor.get_hum()
     temp = monitor.get_temp()
     time = datetime.now()
@@ -31,7 +34,7 @@ def main():
 
     database.save_data(time, temp, hum)
 
-    if temp < 20:
+    if temp < temp_threshold:
         push_bullet.send_note(
             "Cold",
             "The room is under 20 degrees you should bring a jacket"
