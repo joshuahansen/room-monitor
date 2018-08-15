@@ -35,6 +35,8 @@ def create_app():
 
             if not recordings:
                 raise ValueError
+            elif len(recordings) > 24:
+                recordings = recordings[-24:]
 
             return flask.render_template('home.html', data=recordings)
         except (TypeError, ValueError):
