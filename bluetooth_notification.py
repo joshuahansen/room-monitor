@@ -13,13 +13,39 @@ It is intended to be run with python 3 and is used as part
 of Assignement 1 for the course.
 """
 import bluetooth
-from sense_hat import SenseHat
+from sqlite_connection import SqliteConnection
+from sensor_monitor import SensorMonitor
 
 
 def find_devices():
-    """Method for finding nearby devices"""
-    sense = SenseHat()
-    sense.show_message("Scanning")
+    """
+    Method for finding nearby devices
+    Once it finds a saved device it greats them on the LED screen
+    """
+
+    database = SqliteConnection()
+    sense = SensorMonitor()
+    saved_devices = dict()
+
+    sense.bluetooth_logo()
+
+    data = database.get_bluetooth()
+    for row in data:
+        saved_devices[row[1]] = row[0]
+
     nearby_devices = bluetooth.discover_devices()
+    temp = sense.get_temp()
+    sense.clear_led()
+    found_match = False
+
     for device in nearby_devices:
-        print("Name: {0} \nDevice: {1}".format(bluetooth.lookup_name(device), device))
+        device_name = bluetooth.lookup_name(device)
+        if device_name in saved_devices.keys():
+            sense.write(
+                "Welcome {0}! The Temperature is {1}"
+                .format(saved_devices[device_name], temp)
+            )
+            found_match = True
+
+    if not found_match:
+        sense.error_logo()

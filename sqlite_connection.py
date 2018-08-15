@@ -94,6 +94,7 @@ class SqliteConnection:
         """Retrieve all the data from the database"""
         try:
             return self.cur.execute('SELECT * FROM bluetooth_device')
+            self.conn.commit()
         except sqlite3.Error as err:
             self.logger.error(err)
 

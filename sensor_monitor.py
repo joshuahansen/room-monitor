@@ -12,6 +12,7 @@ It is intended to be run with python 3 and is used as part
 of Assignement 1 for the course
 """
 import os
+from time import sleep
 from sense_hat import SenseHat
 
 
@@ -70,3 +71,48 @@ class SensorMonitor:
         """Calibrates the messured temperature with the cpu temperature"""
         cpu_temp = self.get_cpu_temperature()
         return round(sense_temp - ((cpu_temp - sense_temp)/1.5), dec_place)
+
+    def bluetooth_logo(self):
+        """Display bluetooth logo"""
+        b = (0, 0, 255)
+        w = (255, 255, 255)
+
+        logo = [
+            b, b, b, w, b, b, b, b,
+            b, b, b, w, w, b, b, b,
+            b, w, b, w, b, w, b, b,
+            b, b, w, w, w, b, b, b,
+            b, b, w, w, w, b, b, b,
+            b, w, b, w, b, w, b, b,
+            b, b, b, w, w, b, b, b,
+            b, b, b, w, b, b, b, b
+        ]
+        self.sense.low_light = True
+        self.sense.set_pixels(logo)
+
+    def error_logo(self):
+        """display error message"""
+        b = (0, 0, 0)
+        r = (255, 0, 0)
+
+        error = [
+            b, b, b, r, r, b, b, b,
+            b, b, r, b, b, r, b, b,
+            b, r, r, b, b, b, r, b,
+            r, b, b, r, b, b, b, r,
+            r, b, b, b, r, b, b, r,
+            b, r, b, b, b, r, r, b,
+            b, b, r, b, b, r, b, b,
+            b, b, b, r, r, b, b, b
+        ]
+        self.sense.low_light = True
+        for step in range(3):
+            self.sense.set_pixels(error)
+            sleep(0.2)
+            self.clear_led()
+            sleep(0.2)
+
+
+    def clear_led(self):
+        """clear led screen"""
+        self.sense.clear()
