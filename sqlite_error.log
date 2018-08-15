@@ -17,3 +17,15 @@
 2018-08-11 13:43:58,265 - ERROR - SQLite objects created in a thread can only be used in that same thread.The object was created in thread id 1996042256 and this is thread id 1978631280
 2018-08-11 13:55:58,201 - ERROR - SQLite objects created in a thread can only be used in that same thread.The object was created in thread id 1996042256 and this is thread id 1978631280
 2018-08-11 14:01:09,232 - ERROR - SQLite objects created in a thread can only be used in that same thread.The object was created in thread id 1995440144 and this is thread id 1978029168
+2018-08-15 14:43:56,375 - ERROR - no such table: bluetooth_device
+2018-08-15 14:51:47,584 - ERROR - no such table: bluetooth_device
+2018-08-15 14:52:58,389 - ERROR - no such table: bluetooth_device
+2018-08-15 14:54:24,451 - ERROR - table bluetooth_device has 3 columns but 2 values were supplied
+2018-08-15 15:01:41,657 - ERROR - table bluetooth_device has 3 columns but 2 values were supplied
+2018-08-15 15:01:41,657 - ERROR - table bluetooth_device has 3 columns but 2 values were supplied
+2018-08-15 15:01:41,657 - ERROR - table bluetooth_device has 3 columns but 2 values were supplied
+2018-08-15 15:09:48,323 - ERROR - table bluetooth_device already exists
+2018-08-15 15:10:13,666 - ERROR - table bluetooth_device has 3 columns but 2 values were supplied
+2018-08-15 15:10:56,546 - ERROR - table bluetooth_device already exists
+2018-08-15 15:14:16,781 - ERROR - near "FROM": syntax error
+2018-08-15 15:14:16,784 - ERROR - table bluetooth_device already exists

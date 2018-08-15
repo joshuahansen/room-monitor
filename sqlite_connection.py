@@ -56,6 +56,15 @@ class SqliteConnection:
         except sqlite3.Error as err:
             self.logger.error(err)
 
+    def create_bluetooth_table(self):
+        """Used to create a table for storing bluetooth devices"""
+        try:
+            self.cur.execute('''CREATE TABLE bluetooth_device
+                (name text, device text)''')
+            self.conn.commit()
+        except sqlite3.Error as err:
+            self.logger.error(err)
+
     def save_data(self, time, temp, humi):
         """Save the data into the database"""
         try:
@@ -72,10 +81,35 @@ class SqliteConnection:
         except sqlite3.Error as err:
             self.logger.error(err)
 
+    def add_bluetooth(self, name, device):
+        """Save the bluetooth into the database"""
+        try:
+            self.cur.execute(''' INSERT INTO bluetooth_device
+                    VALUES(?, ?)''', (name, device))
+            self.conn.commit()
+        except sqlite3.Error as err:
+            self.logger.error(err)
+    
+    def get_bluetooth(self):
+        """Retrieve all the data from the database"""
+        try:
+            return self.cur.execute('SELECT * FROM bluetooth_device')
+        except sqlite3.Error as err:
+            self.logger.error(err)
+
+
     def delete_table_content(self):
         """Delete all the data from the database. Remove for final release"""
         try:
             self.cur.execute('DELETE FROM sense_readings')
+            self.conn.commit()
+        except sqlite3.Error as err:
+            self.logger.error(err)
+
+    def drop_bluetooth(self):
+        """Remove bluetooth table"""
+        try:
+            self.cur.execute('DROP TABLE bluetooth_device')
             self.conn.commit()
         except sqlite3.Error as err:
             self.logger.error(err)

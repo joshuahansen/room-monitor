@@ -13,20 +13,34 @@ data via a website using the flask framework and
 javascript Charts.js library
 """
 
-import flask
+from flask import Flask, request, render_template
 from sqlite_connection import SqliteConnection
+import bluetooth_notification as bluetooth
+import threading
 
 
 def create_app():
     """Create a falsk application to serve the website"""
 
-    app = flask.Flask(__name__)
+    app = Flask(__name__)
 
 
-    @app.route('/')
+    @app.route('/', methods=['GET', 'POST'])
     def home():
         """Function used to display home page"""
         database = SqliteConnection()
+        if(request):
+            if request.method == 'GET' and request.args:
+                thread = threading.Thread(target=bluetooth.find_devices, daemon=True)
+                thread.start()
+
+            if request.method == 'POST':
+                form = request.form
+                name = form['name']
+                device = form['device_name']
+                print(name)
+                print(device)
+                database.add_bluetooth(name, device)
         data = database.get_data()
         recordings = list()
         try:
@@ -38,9 +52,9 @@ def create_app():
             elif len(recordings) > 24:
                 recordings = recordings[-24:]
 
-            return flask.render_template('home.html', data=recordings)
+            return render_template('home.html', data=recordings)
         except (TypeError, ValueError):
-            return flask.render_template('nodata.html')
+            return render_template('nodata.html')
         finally:
             database.close()
 
