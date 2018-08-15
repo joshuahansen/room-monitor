@@ -89,12 +89,11 @@ class SqliteConnection:
             self.conn.commit()
         except sqlite3.Error as err:
             self.logger.error(err)
-    
+
     def get_bluetooth(self):
         """Retrieve all the data from the database"""
         try:
             return self.cur.execute('SELECT * FROM bluetooth_device')
-            self.conn.commit()
         except sqlite3.Error as err:
             self.logger.error(err)
 
