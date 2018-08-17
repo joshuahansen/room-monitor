@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Author: Joshua Hansen
 Student Number: s3589185
@@ -13,10 +13,10 @@ data via a website using the flask framework and
 javascript Charts.js library
 """
 
+import threading
 from flask import Flask, request, render_template
 from sqlite_connection import SqliteConnection
 import bluetooth_notification as bluetooth
-import threading
 
 
 def create_app():
@@ -29,7 +29,7 @@ def create_app():
     def home():
         """Function used to display home page"""
         database = SqliteConnection()
-        if(request):
+        if request:
             if request.method == 'GET' and request.args:
                 thread = threading.Thread(target=bluetooth.find_devices, daemon=True)
                 thread.start()
@@ -41,19 +41,26 @@ def create_app():
                 print(name)
                 print(device)
                 database.add_bluetooth(name, device)
-        data = database.get_data()
+
+        print("BEFORE")
+        data = database.get_last_24_hours()
+        print(data)
+        print("AFTER")
         recordings = list()
         try:
+            print("TRY")
             for row in data:
                 recordings.append(row)
+                print(row)
 
+            print("BEFORE ERROR CHECK")
             if not recordings:
+                print("VALUEERROR")
                 raise ValueError
-            elif len(recordings) > 24:
-                recordings = recordings[-24:]
 
             return render_template('home.html', data=recordings)
         except (TypeError, ValueError):
+            print("EXCEPT")
             return render_template('nodata.html')
         finally:
             database.close()

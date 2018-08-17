@@ -81,6 +81,24 @@ class SqliteConnection:
         except sqlite3.Error as err:
             self.logger.error(err)
 
+    def get_last_entry(self):
+        """Retrieve last entry from the database"""
+        try:
+            return self.cur.execute('SELECT * FROM sense_readings ORDER BY timestamp DESC LIMIT 1')
+        except sqlite3.Error as err:
+            self.logger.error(err)
+
+    def get_last_24_hours(self):
+        """Retrieve all the data from the database"""
+        try:
+            return self.cur.execute(
+                '''SELECT * FROM sense_readings
+                WHERE timestamp >
+                DATETIME('now', '-1 day')'''
+            )
+        except sqlite3.Error as err:
+            self.logger.error(err)
+
     def add_bluetooth(self, name, device):
         """Save the bluetooth into the database"""
         try:

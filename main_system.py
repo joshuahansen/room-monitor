@@ -34,7 +34,21 @@ def main():
 
     database.save_data(time, temp, hum)
 
-    if temp < temp_threshold:
+    # Get last temperature stored in database or set to threshold
+    data = database.get_last_entry()
+    try:
+        last_entry = 0
+        for row in data:
+            last_entry = row[1]
+    except TypeError:
+        last_entry = temp_threshold
+
+
+    # If temperature is bellow threshold and last temperature was
+    # above the threshold.
+    # This stops the user getting continuous notifications when the
+    # temperature stays bellow the threshold.
+    if temp < temp_threshold <= last_entry:
         push_bullet.send_note(
             "Cold",
             "The room is under 20 degrees you should bring a jacket"
